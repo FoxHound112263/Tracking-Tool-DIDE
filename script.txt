@@ -1,0 +1,86 @@
+// Weeks
+
+Date.prototype.getWeek = function() {
+    var onejan = new Date(this.getFullYear(),0,1);
+    return Math.ceil((((this - onejan) / 86400000) + onejan.getDay()+1)/7);
+} 
+
+// Create document from 'bullets' sheet
+
+function createDocument() {
+  var headers = Sheets.Spreadsheets.Values.get('1Qfq40vbZLosJCmg7rlexlwP647rrf_-o6tRaZLnuffY', "'Bullets'!B1:B49");
+  //var tactics = Sheets.Spreadsheets.Values.get('1dJAd24t3D74yPQZk9XLaZAsQjN37GjMixCLHXqWnBtw', 'A3:I6');
+  var templateId = '18X_VTrSsNZIE0tBeNG_tIZbZJBG1l_8ML2Na4But0Js';
+  
+  // # Day of the week in month
+  var semana = Utilities.formatDate(new Date(), "GMT", "'Semana' w");
+  //fecha en encabezado
+  var fecha = Utilities.formatDate(new Date(), "GMT+1", "yyyy/MM/dd");
+  
+  var cinco = headers.values[5];
+  var siete = headers.values[7];
+  var nueve = headers.values[9];
+  var diezuno = headers.values[11];
+  var dieztres = headers.values[13];
+  var diezcinco = headers.values[15];
+  var diezsiete = headers.values[17];
+  var dieznueve = headers.values[19];
+  var veinteuno = headers.values[21];
+  var veintetres = headers.values[23];
+  var veintecinco = headers.values[25];
+  var veintesiete = headers.values[27];
+  var veintenueve = headers.values[29];
+  var treintauno = headers.values[31];
+  var treintatres = headers.values[33];
+  var treintacinco = headers.values[35];
+  var treintasiete = headers.values[37];
+  var cuarenta = headers.values[40];
+  var cuarentados = headers.values[42];
+  var cuarentacuatro = headers.values[44];
+  var cuarentaseis = headers.values[46];
+  var cuarentaocho = headers.values[48];
+  
+  //Make a copy of the template file
+  var documentId = DriveApp.getFileById(templateId).makeCopy().getId();
+    
+  //Rename the copied file
+  DriveApp.getFileById(documentId).setName( fecha );
+    
+  //Get the document body as a variable
+  var body = DocumentApp.openById(documentId).getBody();
+  
+  //var header = DocumentApp.openById(documentId).getHeader();
+  
+  //var DHeader = header.asHeaderSection();
+
+      
+  //Insert the supplier name
+  body.replaceText('##fecha##', fecha)
+  
+  
+  
+  
+  body.replaceText('##cinco##', cinco)
+  body.replaceText('##siete##', siete)
+  body.replaceText('##nueve##', nueve)
+  body.replaceText('##diezuno##', diezuno)
+  body.replaceText('##dieztres##', dieztres)
+  body.replaceText('##diezcinco##', diezcinco)
+  body.replaceText('##diezsiete##', diezsiete)
+  body.replaceText('##dieznueve##', dieznueve)
+  body.replaceText('##veinteuno##', veinteuno)
+  body.replaceText('##veintetres##', veintetres)
+  body.replaceText('##veintecinco##', veintecinco)
+  body.replaceText('##veintesiete##', veintesiete)
+  body.replaceText('##veintenueve##', veintenueve)
+  body.replaceText('##treintauno##', treintauno)
+  body.replaceText('##treintatres##', treintatres)
+  body.replaceText('##treintacinco##', treintacinco)
+  body.replaceText('##treintasiete##', treintasiete)
+  body.replaceText('##cuarenta##', cuarenta)
+  body.replaceText('##cuarentados##', cuarentados)
+  body.replaceText('##cuarentacuatro##', cuarentacuatro)
+  body.replaceText('##cuarentaseis##', cuarentaseis)
+  body.replaceText('##cuarentaocho##', cuarentaocho)
+  
+}
