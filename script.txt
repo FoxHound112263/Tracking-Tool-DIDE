@@ -9,14 +9,16 @@ Date.prototype.getWeek = function() {
 
 function createDocument() {
   var headers = Sheets.Spreadsheets.Values.get('1Qfq40vbZLosJCmg7rlexlwP647rrf_-o6tRaZLnuffY', "'Bullets'!B1:B49");
-  //var tactics = Sheets.Spreadsheets.Values.get('1dJAd24t3D74yPQZk9XLaZAsQjN37GjMixCLHXqWnBtw', 'A3:I6');
+  
   var templateId = '18X_VTrSsNZIE0tBeNG_tIZbZJBG1l_8ML2Na4But0Js';
   
-  // # Day of the week in month
+  // Day of the week in month
   var semana = Utilities.formatDate(new Date(), "GMT", "'Semana' w");
-  //fecha en encabezado
+  // Date
   var fecha = Utilities.formatDate(new Date(), "GMT+1", "yyyy/MM/dd");
   
+
+  // Variable for each value in template
   var cinco = headers.values[5];
   var siete = headers.values[7];
   var nueve = headers.values[9];
@@ -40,25 +42,20 @@ function createDocument() {
   var cuarentaseis = headers.values[46];
   var cuarentaocho = headers.values[48];
   
-  //Make a copy of the template file
+  // Make a copy of the template file
   var documentId = DriveApp.getFileById(templateId).makeCopy().getId();
     
-  //Rename the copied file
+  // Rename the copied file
   DriveApp.getFileById(documentId).setName( fecha );
     
-  //Get the document body as a variable
+  // Get the document body as a variable
   var body = DocumentApp.openById(documentId).getBody();
-  
-  //var header = DocumentApp.openById(documentId).getHeader();
-  
-  //var DHeader = header.asHeaderSection();
-
       
-  //Insert the supplier name
+  // Replace current date in template
   body.replaceText('##fecha##', fecha)
   
   
-  
+  // Replace each value in bullets to its corresponding space in template
   
   body.replaceText('##cinco##', cinco)
   body.replaceText('##siete##', siete)
